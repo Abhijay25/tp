@@ -14,27 +14,29 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Name;
 
-/**
- * Parses input arguments and creates a new BookCommand object
- */
+/** Parses input arguments and creates a new BookCommand object */
 public class BookCommandParser implements Parser<BookCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the BookCommand
-     * and returns a BookCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the BookCommand and returns a
+     * BookCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
     public BookCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_CLIENT, PREFIX_NAME, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(
+                        args, PREFIX_DATETIME, PREFIX_CLIENT, PREFIX_NAME, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_CLIENT, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_CLIENT, PREFIX_NAME, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_DATETIME, PREFIX_CLIENT, PREFIX_NAME, PREFIX_DESCRIPTION);
 
         // Parse datetime
         String datetimeStr = argMultimap.getValue(PREFIX_DATETIME).get().trim();
@@ -71,8 +73,9 @@ public class BookCommandParser implements Parser<BookCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean arePrefixesPresent(
+            ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes)
+                .allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
-

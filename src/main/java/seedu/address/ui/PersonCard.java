@@ -8,22 +8,22 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 import seedu.address.model.booking.Booking;
 import seedu.address.model.person.Person;
 
-/**
- * An UI component that displays information of a {@code Person}.
- */
+/** An UI component that displays information of a {@code Person}. */
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
     /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
+     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As
+     * a consequence, UI elements' variable names cannot be set to such keywords or an exception
+     * will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on
+     *     AddressBook level 4</a>
      */
 
     // Array of color styles for tags
@@ -47,24 +47,15 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name;
-    @FXML
-    private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
-    @FXML
-    private VBox bookings;
+    @FXML private HBox cardPane;
+    @FXML private Label name;
+    @FXML private Label id;
+    @FXML private Label phone;
+    @FXML private Label email;
+    @FXML private FlowPane tags;
+    @FXML private VBox bookings;
 
-    /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-     */
+    /** Creates a {@code PersonCode} with the given {@code Person} and index to display. */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
@@ -74,29 +65,34 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label tagLabel = new Label(tag.tagName);
-                    tagLabel.setStyle(getColorForTag(tag.tagName));
-                    tags.getChildren().add(tagLabel);
-                });
+                .forEach(
+                        tag -> {
+                            Label tagLabel = new Label(tag.tagName);
+                            tagLabel.setStyle(getColorForTag(tag.tagName));
+                            tags.getChildren().add(tagLabel);
+                        });
 
         // Display bookings
         person.getBookings().stream()
                 .sorted(Comparator.comparing(Booking::getDateTime))
-                .forEach(booking -> {
-                    Label bookingLabel = new Label(String.format("📅 %s with %s - %s",
-                            booking.getDateTimeString(),
-                            booking.getClientName(),
-                            booking.getDescription()));
-                    bookingLabel.setWrapText(true);
-                    bookingLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #3e7b91;");
-                    bookings.getChildren().add(bookingLabel);
-                });
+                .forEach(
+                        booking -> {
+                            Label bookingLabel =
+                                    new Label(
+                                            String.format(
+                                                    "📅 %s with %s - %s",
+                                                    booking.getDateTimeString(),
+                                                    booking.getClientName(),
+                                                    booking.getDescription()));
+                            bookingLabel.setWrapText(true);
+                            bookingLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #3e7b91;");
+                            bookings.getChildren().add(bookingLabel);
+                        });
     }
 
     /**
-     * Returns a color style for a tag based on its name.
-     * The same tag name will always get the same color.
+     * Returns a color style for a tag based on its name. The same tag name will always get the same
+     * color.
      */
     private String getColorForTag(String tagName) {
         int hash = Math.abs(tagName.hashCode());

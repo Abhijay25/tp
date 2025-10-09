@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.Booking;
 
-/**
- * Jackson-friendly version of {@link Booking}.
- */
+/** Jackson-friendly version of {@link Booking}. */
 class JsonAdaptedBooking {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Booking's %s field is missing!";
@@ -20,23 +18,20 @@ class JsonAdaptedBooking {
     private final String datetime;
     private final String description;
 
-    /**
-     * Constructs a {@code JsonAdaptedBooking} with the given booking details.
-     */
+    /** Constructs a {@code JsonAdaptedBooking} with the given booking details. */
     @JsonCreator
-    public JsonAdaptedBooking(@JsonProperty("id") String id,
-                              @JsonProperty("clientName") String clientName,
-                              @JsonProperty("datetime") String datetime,
-                              @JsonProperty("description") String description) {
+    public JsonAdaptedBooking(
+            @JsonProperty("id") String id,
+            @JsonProperty("clientName") String clientName,
+            @JsonProperty("datetime") String datetime,
+            @JsonProperty("description") String description) {
         this.id = id;
         this.clientName = clientName;
         this.datetime = datetime;
         this.description = description;
     }
 
-    /**
-     * Converts a given {@code Booking} into this class for Jackson use.
-     */
+    /** Converts a given {@code Booking} into this class for Jackson use. */
     public JsonAdaptedBooking(Booking source) {
         id = source.getId();
         clientName = source.getClientName();
@@ -45,9 +40,11 @@ class JsonAdaptedBooking {
     }
 
     /**
-     * Converts this Jackson-friendly adapted booking object into the model's {@code Booking} object.
+     * Converts this Jackson-friendly adapted booking object into the model's {@code Booking}
+     * object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted booking.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted
+     *     booking.
      */
     public Booking toModelType() throws IllegalValueException {
         if (id == null) {
@@ -55,7 +52,8 @@ class JsonAdaptedBooking {
         }
 
         if (clientName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "clientName"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "clientName"));
         }
         if (!Booking.isValidClientName(clientName)) {
             throw new IllegalValueException(Booking.MESSAGE_CONSTRAINTS_CLIENT);
@@ -63,7 +61,8 @@ class JsonAdaptedBooking {
         final String modelClientName = clientName;
 
         if (datetime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "datetime"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "datetime"));
         }
         final LocalDateTime modelDatetime = Booking.parseDateTime(datetime);
         if (modelDatetime == null) {
@@ -71,7 +70,8 @@ class JsonAdaptedBooking {
         }
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }
         if (!Booking.isValidDescription(description)) {
             throw new IllegalValueException(Booking.MESSAGE_CONSTRAINTS_DESCRIPTION);
@@ -81,4 +81,3 @@ class JsonAdaptedBooking {
         return new Booking(id, modelClientName, modelDatetime, modelDescription);
     }
 }
-

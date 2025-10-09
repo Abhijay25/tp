@@ -9,9 +9,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
-/**
- * A class to access UserPrefs stored in the hard disk as a json file
- */
+/** A class to access UserPrefs stored in the hard disk as a json file */
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     private Path filePath;
@@ -32,6 +30,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     /**
      * Similar to {@link #readUserPrefs()}
+     *
      * @param prefsFilePath location of the data. Cannot be null.
      * @throws DataLoadingException if the file format is not as expected.
      */
@@ -43,5 +42,4 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         JsonUtil.saveJsonFile(userPrefs, filePath);
     }
-
 }

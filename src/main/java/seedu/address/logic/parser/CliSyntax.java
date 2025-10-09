@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
-/**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
- */
+/** Contains Command Line Interface (CLI) syntax definitions common to multiple commands */
 public class CliSyntax {
 
     /* Prefix definitions */
@@ -14,5 +12,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATETIME = new Prefix("d/");
     public static final Prefix PREFIX_CLIENT = new Prefix("c/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("desc/");
-
 }

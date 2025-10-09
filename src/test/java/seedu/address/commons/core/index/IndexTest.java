@@ -61,7 +61,8 @@ public class IndexTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromZeroBased(0);
-        String expected = Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
+        String expected =
+                Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
         assertEquals(expected, index.toString());
     }
 }

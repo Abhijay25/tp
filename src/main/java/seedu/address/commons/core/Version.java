@@ -6,9 +6,7 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Represents a version with major, minor and patch number
- */
+/** Represents a version with major, minor and patch number */
 public class Version implements Comparable<Version> {
 
     public static final String VERSION_REGEX = "V(\\d+)\\.(\\d+)\\.(\\d+)(ea)?";
@@ -22,9 +20,7 @@ public class Version implements Comparable<Version> {
     private final int patch;
     private final boolean isEarlyAccess;
 
-    /**
-     * Constructs a {@code Version} with the given version details.
-     */
+    /** Constructs a {@code Version} with the given version details. */
     public Version(int major, int minor, int patch, boolean isEarlyAccess) {
         this.major = major;
         this.minor = minor;
@@ -50,6 +46,7 @@ public class Version implements Comparable<Version> {
 
     /**
      * Parses a version number string in the format V1.2.3.
+     *
      * @param versionString version number string
      * @return a Version object
      */
@@ -58,10 +55,12 @@ public class Version implements Comparable<Version> {
         Matcher versionMatcher = VERSION_PATTERN.matcher(versionString);
 
         if (!versionMatcher.find()) {
-            throw new IllegalArgumentException(String.format(EXCEPTION_STRING_NOT_VERSION, versionString));
+            throw new IllegalArgumentException(
+                    String.format(EXCEPTION_STRING_NOT_VERSION, versionString));
         }
 
-        return new Version(Integer.parseInt(versionMatcher.group(1)),
+        return new Version(
+                Integer.parseInt(versionMatcher.group(1)),
                 Integer.parseInt(versionMatcher.group(2)),
                 Integer.parseInt(versionMatcher.group(3)),
                 versionMatcher.group(4) == null ? false : true);

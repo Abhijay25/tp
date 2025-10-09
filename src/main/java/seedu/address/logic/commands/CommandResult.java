@@ -6,9 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-/**
- * Represents the result of a command execution.
- */
+/** Represents the result of a command execution. */
 public class CommandResult {
 
     private final String feedbackToUser;
@@ -19,9 +17,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
+    /** Constructs a {@code CommandResult} with the specified fields. */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
@@ -29,8 +25,8 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, and other
+     * fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
@@ -78,5 +74,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }

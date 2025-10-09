@@ -10,41 +10,47 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.LogsCenter;
 
-/**
- * Controller for a help page
- */
+/** Controller for a help page */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t08-4.github.io/tp/UserGuide.html";
+    public static final String USERGUIDE_URL =
+            "https://ay2526s1-cs2103t-t08-4.github.io/tp/UserGuide.html";
 
-    public static final String ADD_COMMAND = "Add: add /n <name> /p <phone> /e <email> [/t <tag1> (<tag2>)...]";
+    public static final String ADD_COMMAND =
+            "Add: add /n <name> /p <phone> /e <email> [/t <tag1> (<tag2>)...]";
     public static final String DELETE_COMMAND = "Delete: delete /n <name> [/t <tag1> (<tag2>)...]";
-    public static final String BOOK_COMMAND = "Book: book /d <datetime> /c <client_name> "
-            + "/n <person_name> [/desc <description>]";
+    public static final String BOOK_COMMAND =
+            "Book: book /d <datetime> /c <client_name> " + "/n <person_name> [/desc <description>]";
     public static final String FIND_COMMAND = "Find: find [/n <name>] [/t <tag>] [/d <date>] **";
-    public static final String ENDING_NOTE = "Note: Any fields within [] and () are optional.\n"
-            + "** Any 1 field is required for find command.";
+    public static final String ENDING_NOTE =
+            "Note: Any fields within [] and () are optional.\n"
+                    + "** Any 1 field is required for find command.";
 
-    public static final String HELP_MESSAGE = ADD_COMMAND + "\n"
-            + DELETE_COMMAND + "\n"
-            + BOOK_COMMAND + "\n"
-            + FIND_COMMAND + "\n\n"
-            + ENDING_NOTE + "\n\n"
-            + "For more information, please refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE =
+            ADD_COMMAND
+                    + "\n"
+                    + DELETE_COMMAND
+                    + "\n"
+                    + BOOK_COMMAND
+                    + "\n"
+                    + FIND_COMMAND
+                    + "\n\n"
+                    + ENDING_NOTE
+                    + "\n\n"
+                    + "For more information, please refer to the user guide: "
+                    + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    @FXML
-    private Button copyButton;
+    @FXML private Button copyButton;
 
-    @FXML
-    private Button quitButton;
+    @FXML private Button quitButton;
 
-    @FXML
-    private Label helpMessage;
+    @FXML private Label helpMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -57,31 +63,31 @@ public class HelpWindow extends UiPart<Stage> {
         setupKeyboardHandlers();
     }
 
-    /**
-     * Creates a new HelpWindow.
-     */
+    /** Creates a new HelpWindow. */
     public HelpWindow() {
         this(new Stage());
     }
 
-    /**
-     * Sets up keyboard event handlers for the help window.
-     */
+    /** Sets up keyboard event handlers for the help window. */
     private void setupKeyboardHandlers() {
-        getRoot().addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                hide();
-                event.consume();
-            } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
-                // Arrow key navigation between buttons
-                if (copyButton.isFocused()) {
-                    quitButton.requestFocus();
-                } else if (quitButton.isFocused()) {
-                    copyButton.requestFocus();
-                }
-                event.consume();
-            }
-        });
+        getRoot()
+                .addEventHandler(
+                        KeyEvent.KEY_PRESSED,
+                        event -> {
+                            if (event.getCode() == KeyCode.ENTER) {
+                                hide();
+                                event.consume();
+                            } else if (event.getCode() == KeyCode.LEFT
+                                    || event.getCode() == KeyCode.RIGHT) {
+                                // Arrow key navigation between buttons
+                                if (copyButton.isFocused()) {
+                                    quitButton.requestFocus();
+                                } else if (quitButton.isFocused()) {
+                                    copyButton.requestFocus();
+                                }
+                                event.consume();
+                            }
+                        });
 
         // Make both buttons focusable for navigation
         copyButton.setFocusTraversable(true);
@@ -90,20 +96,13 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
      *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
+     *       <li>if this method is called on a thread other than the JavaFX Application Thread.
+     *       <li>if this method is called during animation or layout processing.
+     *       <li>if this method is called on the primary stage.
+     *       <li>if {@code dialogStage} is already showing.
      *     </ul>
      */
     public void show() {
@@ -114,30 +113,22 @@ public class HelpWindow extends UiPart<Stage> {
         quitButton.requestFocus();
     }
 
-    /**
-     * Returns true if the help window is currently being shown.
-     */
+    /** Returns true if the help window is currently being shown. */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
-    /**
-     * Hides the help window.
-     */
+    /** Hides the help window. */
     public void hide() {
         getRoot().hide();
     }
 
-    /**
-     * Focuses on the help window.
-     */
+    /** Focuses on the help window. */
     public void focus() {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
+    /** Copies the URL to the user guide to the clipboard. */
     @FXML
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -146,9 +137,7 @@ public class HelpWindow extends UiPart<Stage> {
         clipboard.setContent(url);
     }
 
-    /**
-     * Closes the help window.
-     */
+    /** Closes the help window. */
     @FXML
     private void handleQuit() {
         hide();

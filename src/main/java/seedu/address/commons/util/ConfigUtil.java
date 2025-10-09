@@ -7,9 +7,7 @@ import java.util.Optional;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
 
-/**
- * A class for accessing the Config File.
- */
+/** A class for accessing the Config File. */
 public class ConfigUtil {
 
     public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
@@ -19,5 +17,4 @@ public class ConfigUtil {
     public static void saveConfig(Config config, Path configFilePath) throws IOException {
         JsonUtil.saveJsonFile(config, configFilePath);
     }
-
 }

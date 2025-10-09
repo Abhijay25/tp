@@ -4,6 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'application'
     id 'jacoco'
+    id 'com.diffplug.spotless' version '6.25.0'
 }
 
 mainClassName = 'seedu.address.Main'
@@ -68,5 +69,53 @@ dependencies {
 shadowJar {
     archiveFileName = 'addressbook.jar'
 }
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        googleJavaFormat('1.17.0').aosp() // keep general formatting
+
+        importOrder('', 'java', 'javax', 'javafx', 'org', 'com', 'seedu')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+
+        // Align 'case' and 'default' directly under 'switch'
+        custom('CS2103T switch-case', { str ->
+            // First, fix case/default indentation
+            def fixedCases = str.replaceAll(/(?m)^(\s+)case /) { fullMatch, indent ->
+                def switchIndent = indent.take(indent.length() - 4) // assume block indentation is 4 spaces
+                return switchIndent + 'case '
+            }.replaceAll(/(?m)^(\s+)default:/) { fullMatch, indent ->
+                def switchIndent = indent.take(indent.length() - 4)
+                return switchIndent + 'default:'
+            }
+
+            // Then, move child block (return statements) 4 spaces to the left
+            def lines = fixedCases.split('\n')
+            def result = []
+            def insideCase = false
+            lines.each { line ->
+                if (line.trim().startsWith('case ') || line.trim().startsWith('default:')) {
+                    insideCase = true
+                    result << line
+                } else if (insideCase && line.trim()) {
+                    // move 4 spaces to the left, but never negative
+                    def currentIndent = line.takeWhile { it == ' ' }.length()
+                    def newIndent = Math.max(currentIndent - 4, 0)
+                    result << ' ' * newIndent + line.trim()
+                } else {
+                    insideCase = false
+                    result << line
+                }
+            }
+
+            return result.join('\n') + '\n'
+        })
+    }
+}
+
+
+
 
 defaultTasks 'clean', 'test'

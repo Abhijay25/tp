@@ -14,8 +14,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person in the address book. Guarantees: details are present and not null, field
+ * values are validated, immutable.
  */
 public class Person {
 
@@ -29,17 +29,19 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final List<Booking> bookings = new ArrayList<>();
 
-    /**
-     * Every field must be present and not null.
-     */
+    /** Every field must be present and not null. */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags, new ArrayList<>());
     }
 
-    /**
-     * Constructor with bookings.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Booking> bookings) {
+    /** Constructor with bookings. */
+    public Person(
+            Name name,
+            Phone phone,
+            Email email,
+            Address address,
+            Set<Tag> tags,
+            List<Booking> bookings) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -68,37 +70,36 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
+     * modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns an immutable booking list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable booking list, which throws {@code UnsupportedOperationException} if
+     * modification is attempted.
      */
     public List<Booking> getBookings() {
         return Collections.unmodifiableList(bookings);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name. This defines a weaker notion of equality
+     * between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. This defines a stronger
+     * notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -137,5 +138,4 @@ public class Person {
                 .add("bookings", bookings)
                 .toString();
     }
-
 }

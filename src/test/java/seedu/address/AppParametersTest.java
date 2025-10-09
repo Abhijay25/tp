@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.application.Application;
+
+import org.junit.jupiter.api.Test;
 
 public class AppParametersTest {
 
@@ -42,7 +42,11 @@ public class AppParametersTest {
     @Test
     public void toStringMethod() {
         AppParameters appParameters = new AppParameters();
-        String expected = AppParameters.class.getCanonicalName() + "{configPath=" + appParameters.getConfigPath() + "}";
+        String expected =
+                AppParameters.class.getCanonicalName()
+                        + "{configPath="
+                        + appParameters.getConfigPath()
+                        + "}";
         assertEquals(expected, appParameters.toString());
     }
 

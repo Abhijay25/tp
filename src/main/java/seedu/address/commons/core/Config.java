@@ -7,9 +7,7 @@ import java.util.logging.Level;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-/**
- * Config values used by the app
- */
+/** Config values used by the app */
 public class Config {
 
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
@@ -62,5 +60,4 @@ public class Config {
                 .add("userPrefsFilePath", userPrefsFilePath)
                 .toString();
     }
-
 }
