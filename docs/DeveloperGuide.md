@@ -922,7 +922,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Open a command terminal and navigate to the folder containing the jar file.
 
-   1. Run `java -jar firstimpressions.jar` <br>
+   1. Run `java -jar FirstImpressions.jar` <br>
       Expected: Application launches successfully with the GUI. Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences

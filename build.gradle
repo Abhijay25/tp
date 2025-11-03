@@ -75,7 +75,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'firstimpressions.jar'
+    archiveFileName = 'FirstImpressions.jar'
 }
 
 run {

@@ -115,7 +115,7 @@ Step 3: **Run the application**
 
    - Open your command terminal, [as follows](#verify-java)
    - Navigate to the folder: `cd /path/to/your/folder`
-   - Run: `java -jar firstimpressions.jar`
+   - Run: `java -jar FirstImpressions.jar`
 
 Step 4: **Verify successful launch:** <br>
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
