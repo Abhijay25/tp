@@ -385,35 +385,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
  - 2a. Person already exists \
-    FirstImpressions throws error "A person with this name already exists in your address book!
-    If you want to add tags to this person, please include a t/TAG field in your command.
-    Example: add n/John Doe t/VIP" \
+    FirstImpressions throws error <br>
+    <code>
+    A person with this name already exists in your address book!<br>
+    If you want to add tags to this person, please include a t/TAG field in your command.<br>
+    Example: add n/John Doe t/VIP
+    </code><br>
     Use case ends
 
  - 2b. Name is too long \
-    FirstImpressions throws error "Name too long" \
+    FirstImpressions throws error <br>
+    <code>
+    Name too long
+    </code><br>
     Use case ends
 
  - 2c. Name is blank \
-    FirstImpressions throws error "Names should not be blank and must be 100 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Names should not be blank and must be 100 characters or less.
+    </code><br>
     Use case ends
 
  - 2d. Too many tags \
-    FirstImpressions throws error "Cannot add tags - tag limit reached!\nContact '[name]' already has [X] tag(s), and you're trying to add [Y] more.\nMaximum allowed: [max] tags per contact.\nPlease remove some existing tags before adding new ones." \
+    FirstImpressions throws error <br>
+    <code>
+    Cannot add tags - tag limit reached!<br>
+    Contact '[name]' already has [X] tag(s), and you're trying to add [Y] more.<br>
+    Maximum allowed: [max] tags per contact.<br>
+    Please remove some existing tags before adding new ones.
+    </code><br>
     Use case ends
 
  - 2e. Invalid tag \
-    FirstImpressions throws error "Tag names should not be blank and should only contain letters and numbers (no spaces or special characters).\nExamples: 'VIP', 'friend', 'colleague2024'" \
+    FirstImpressions throws error <br>
+    <code>
+    Tag names should not be blank and should only contain letters and numbers (no spaces or special characters).<br>
+    Examples: 'VIP', 'friend', 'colleague2024'
+    </code><br>
     Use case ends
 
  - 2f. Tag is too long \
-    FirstImpressions throws error "Tag name is too long! Please keep it to 50 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Tag name is too long! Please keep it to 50 characters or less.
+    </code><br>
     Use case ends
 
  - 2g. Email is too long \
-    FirstImpressions throws error "Email address is too long! Please keep it to 50 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Email address is too long! Please keep it to 50 characters or less.
+    </code><br>
     Use case ends
-
 
 #### **Use Case: Delete a Person**
 
@@ -431,9 +455,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. Person does not exist \
-  FirstImpressions throws error "Could not find anyone named '[name]' in your address book.\nPlease check the name and try again." \
-  Use case ends
+- **2a.** Person does not exist. \
+  FirstImpressions displays an error <br>
+  <code>
+  Could not find anyone named '[name]' in your address book.<br>
+  Please check the name and try again.
+  </code><br>
+  Use case ends.
 
 
 #### **Use Case: Book a Person**
@@ -453,31 +481,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. Double Booking \
-  FirstImpressions throws error "Booking conflict! [Team Member] is already booked at [datetime].\nExisting booking: Client '[Client Name]' for [[Description]]\nPlease choose a different time slot." \
+  FirstImpressions throws error <br>
+  <code>
+  Booking conflict! [Team Member] is already booked at [datetime].<br>
+  Existing booking: Client '[Client Name]' for [[Description]]<br>
+  Please choose a different time slot.
+  </code><br>
   Use case ends
 
 - 2b. Missing parameters \
-  FirstImpressions displays an error: "Invalid command format!\n[Usage details]" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!<br>
+  [Usage details]
+  </code><br>
   Use case ends
 
 - 2c. Invalid client name (blank/too long) \
-  FirstImpressions throws error "Client name should not be blank and must be 100 characters or less." \
+  FirstImpressions throws error <br>
+  <code>
+  Client name should not be blank and must be 100 characters or less.
+  </code><br>
   Use case ends
 
 - 2d. Invalid datetime format \
-  FirstImpressions throws error "Invalid date/time format or value!\nPlease use the format: YYYY-MM-DD HH:MM (e.g., 2024-12-25 14:30)" \
+  FirstImpressions throws error <br>
+  <code>
+  Invalid date/time format or value!<br>
+  Please use the format: YYYY-MM-DD HH:MM (e.g., 2024-12-25 14:30)
+  </code><br>
   Use case ends
 
 - 2e. Invalid datetime value \
-  FirstImpressions throws error "Invalid datetime \"[formatted datetime]\", that datetime does not exist " (e.g., "Invalid datetime \"February 31st 2026 14:00\", that datetime does not exist " for invalid dates like February 31st) \
+  FirstImpressions throws error <br>
+  <code>
+  Invalid datetime "[formatted datetime]", that datetime does not exist
+  </code><br>
+  (e.g., "Invalid datetime \"February 31st 2026 14:00\", that datetime does not exist " for invalid dates like February 31st) <br>
   Use case ends
 
 - 2f. Duplicate parameter \
-  FirstImpressions throws error "You've specified multiple values for these fields that should only have one value: [duplicate field names]" \
+  FirstImpressions throws error <br>
+  <code>
+  You've specified multiple values for these fields that should only have one value: [duplicate field names]
+  </code><br>
   Use case ends
 
 - 2g. Unknown parameter \
-  FirstImpressions throws error "Unknown parameter: [parameter]. Valid parameters are d/, c/, p/, desc/" \
+  FirstImpressions throws error <br>
+  <code>
+  Unknown parameter: [parameter]. Valid parameters are d/, c/, p/, desc/
+  </code><br>
   Use case ends
 
 
@@ -503,15 +557,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Name search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find n/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario.
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario.
 
 - **3c.** Partial name provided. \
   FirstImpressions lists all persons whose names contain the given substring.
@@ -531,15 +592,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Tag search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find t/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario.
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario.
 
 - **3c.** Multiple valid prefixes provided. \
   FirstImpressions combines criteria (logical OR semantics) to refine results.
@@ -559,19 +627,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Date search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **1b.** Invalid date format provided. \
-  FirstImpressions displays an error: "Invalid date! Expected format: YYYY-MM-DD (e.g., 2025-10-20)" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid date! Expected format: YYYY-MM-DD (e.g., 2025-10-20)
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find d/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario. <br>
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario. <br>
 
 
 ---
