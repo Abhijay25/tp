@@ -43,11 +43,11 @@ title: Developer Guide
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
@@ -96,6 +96,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T08-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -113,6 +115,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model` and their respective `Booking` objects.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -120,6 +124,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Alex")` API call as an example.
 
@@ -136,6 +142,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png"/>
@@ -143,6 +151,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `FirstImpressionsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FirstImpressionsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -165,6 +175,8 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -181,7 +193,6 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
-
 
 ### **Design Choices**
 
@@ -245,6 +256,8 @@ These operations are exposed in the `Model` interface as `Model#commitFirstImpre
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
+<div style="page-break-after: always;"></div>
+
 Step 1. The user launches the application for the first time. The `VersionedFirstImpressions` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
@@ -256,6 +269,8 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitFirstImpressions()`, causing another modified address book state to be saved into the `FirstImpressionsStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitFirstImpressions()`, so the address book state will not be saved into the `FirstImpressionsStateList`.
 
@@ -343,6 +358,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**: Helps leaders to keep track of their team of relationship professionals’ strengths, along with their schedules. With FirstImpressions, no client request is too hard to handle as our system is able to search through multiple preferences, ensuring the perfect match for our customers.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -400,6 +416,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     </code><br>
     Use case ends
 
+<div style="page-break-after: always;"></div>
+
  - 2c. Name is blank \
     FirstImpressions throws error <br>
     <code>
@@ -438,6 +456,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Email address is too long! Please keep it to 50 characters or less.
     </code><br>
     Use case ends
+
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Delete a Person**
 
@@ -489,6 +509,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   </code><br>
   Use case ends
 
+<div style="page-break-after: always;"></div>
+
 - 2b. Missing parameters \
   FirstImpressions displays an error <br>
   <code>
@@ -534,6 +556,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   </code><br>
   Use case ends
 
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Find a Person**
 
@@ -577,6 +600,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3c.** Partial name provided. \
   FirstImpressions lists all persons whose names contain the given substring.
 
+<div style="page-break-after: always;"></div>
+
 <!-- omit in toc -->
 ##### **Main Success Scenario (MSS) - Finding by Tag**
 
@@ -611,6 +636,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **3c.** Multiple valid prefixes provided. \
   FirstImpressions combines criteria (logical OR semantics) to refine results.
+
+<div style="page-break-after: always;"></div>
 
 <!-- omit in toc -->
 ##### **Main Success Scenario (MSS) - Finding by Date**
@@ -651,8 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   FirstImpressions lists all persons. <br>
   Use case continues as in the main scenario. <br>
 
-
----
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Help Menu**
 
@@ -666,7 +692,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. FirstImpressions shows pop-up menu with all command usage
 3. Use case ends
 
----
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -694,6 +720,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
@@ -743,6 +770,7 @@ Highlights relevant bookings to users searching by client name using `find d/`.
 
 ---
 
+<div style="page-break-after: always;"></div>
 
 ### Reschedule Date or Time of Current Booking
 
@@ -819,6 +847,7 @@ The reschedule mechanism allows users to update the datetime of an existing book
   - Team member name (`n/`) matches the name in the booking. (New consideration)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Edit Current Booking's Clients/Description
 
@@ -874,7 +903,8 @@ The edit booking mechanism allows users to update the client name or description
       - **Success Example:**
 
         ```
-        Booking updated successfully: Carl Kurz, Client: Madam Wong, Description: Updated consultation details
+        Booking updated successfully: Carl Kurz, Client: Madam Wong,
+        Description: Updated consultation details
         ```
 
       - **Failure Example:** Appropriate error message.
@@ -915,6 +945,8 @@ The edit booking mechanism allows users to update the client name or description
     Error: "Team member name does not match the booking"
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Timezone Support for Scheduled Bookings
 
@@ -998,6 +1030,8 @@ The timezone mechanism allows users to work with bookings across different timez
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1025,6 +1059,8 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 <!-- omit in toc -->
 ### Adding a person
 
@@ -1049,6 +1085,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add n/ p/123 e/invalid-email`<br>
       Expected: Error message "Names should not be blank and must be 100 characters or less."
+
+<div style="page-break-after: always;"></div>
 
 <!-- omit in toc -->
 ### Editing a person
@@ -1077,6 +1115,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `edit n/john doe p/91234567`<br>
       Expected: Error message "Person with name 'john doe' not found in the address book" is shown (case-sensitive).
 
+<div style="page-break-after: always;"></div>
+
 <!-- omit in toc -->
 ### Finding persons
 
@@ -1104,6 +1144,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find n/NonExistentPerson`<br>
       Expected: "0 persons listed!" message is shown.
 
+<div style="page-break-after: always;"></div>
+
 <!-- omit in toc -->
 ### Deleting a person
 
@@ -1125,6 +1167,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `delete n/john doe`<br>
       Expected: Error message "Person not found" is shown (case-sensitive).
+
+<div style="page-break-after: always;"></div>
 
 <!-- omit in toc -->
 ### Booking Appointments
@@ -1153,6 +1197,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `book dt/2025-12-25 10:00 c/Madam Chen n/NonExistentPerson`<br>
       Expected: Error message "Person not found" is shown.
 
+<div style="page-break-after: always;"></div>
+
 <!-- omit in toc -->
 ### Clearing all entries
 
@@ -1162,6 +1208,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `clear f/`<br>
       Expected: All persons and bookings are removed. Success message shown. Contact list becomes empty.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -1191,6 +1239,8 @@ testers are expected to do more *exploratory* testing.
 
    3. Launch the application again.<br>
       Expected: The person "Test Person" is still in the contact list.
+
+<div style="page-break-after: always;"></div>
 
 <!-- omit in toc -->
 ### Help command
