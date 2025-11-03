@@ -5,41 +5,49 @@ title: Developer Guide
 
 <div class="print-toc" markdown="1">
 
+<!-- omit in toc -->
 ## Table of Contents
 
-* [Setting up, getting started](#setting-up-getting-started)
-* [Design](#design)
-  * [Architecture](#architecture)
-  * [UI component](#ui-component)
-  * [Logic component](#logic-component)
-  * [Model component](#model-component)
-  * [Storage component](#storage-component)
-  * [Common classes](#common-classes)
-  * [Design Choices](#design-choices)
-* [Proposed Features](#proposed-features)
-  * [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
-  * [[Proposed] Timezone Support](#proposed-timezone-support)
-  * [[Proposed] Find Booking](#proposed-find-booking)
-  * [[Proposed] Toggle Between 24H to 12H Time](#proposed-toggle-between-24h-to-12h-time)
-* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-* [Appendix: Requirements](#appendix-requirements)
-  * [Product scope](#product-scope)
-  * [User stories](#user-stories)
-  * [Use cases](#use-cases)
-  * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-* [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+  - [**Design Choices**](#design-choices)
+- [**Proposed Features**](#proposed-features)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+    - [**Use Case: Add a Person**](#use-case-add-a-person)
+    - [**Use Case: Delete a Person**](#use-case-delete-a-person)
+    - [**Use Case: Book a Person**](#use-case-book-a-person)
+    - [**Use Case: Find a Person**](#use-case-find-a-person)
+    - [**Use Case: Help Menu**](#use-case-help-menu)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+  - [Filter Booking Table for `find`](#filter-booking-table-for-find)
+  - [Reschedule Date or Time of Current Booking](#reschedule-date-or-time-of-current-booking)
+  - [Edit Current Booking's Clients/Description](#edit-current-bookings-clientsdescription)
+  - [Timezone Support for Scheduled Bookings](#timezone-support-for-scheduled-bookings)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Saving data](#saving-data)
+  - [Error handling](#error-handling)
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
@@ -73,7 +81,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete n/Alex`.
 
 <img src="images/ArchitectureSequenceDiagram.png"/>
 
@@ -87,6 +95,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <img src="images/ComponentManagers.png"/>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -105,6 +115,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model` and their respective `Booking` objects.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -113,9 +125,11 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<div style="page-break-after: always;"></div>
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Alex")` API call as an example.
+
+![Interactions Inside the Logic Component for the `delete n/Alex` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -128,6 +142,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png"/>
@@ -135,6 +151,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `FirstImpressionsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FirstImpressionsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -157,6 +175,8 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/FirstImpressions-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -174,11 +194,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
 
-
 ### **Design Choices**
 
+<!-- omit in toc -->
 #### Find Command
 
+<!-- omit in toc -->
 ##### **Aspect: Where to Perform Input Validation**
 - **Alternative 1:** Validate parameters in `ClientContainsKeywordsPredicate`.
   - *Pros:* Keeps `FindCommandParser` simpler.
@@ -190,7 +211,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 **Chosen Approach:**
 Validation is performed in `FindCommandParser` for better separation of concerns — parsing vs filtering.
 
-
+<!-- omit in toc -->
 ##### **Aspect: Handling Multiple Prefixes**
 - **Alternative 1:** Search for results using a logical **AND** operation making search results more accurate and  easy to find specific team members
 - **Alternative 2 (current choice):** Search for results   using a logical **OR** operation to include as many results as possible to ensure user does not miss / mismatch any inputs and intended results
@@ -202,7 +223,7 @@ Validation is performed in `FindCommandParser` for better separation of concerns
   - e.g., `find n/Alex t/friend` returns persons whose name *contains "Alex"* **or** those who have the tag *"friend"*.
 - This makes it easier to find for users.
 
-
+<!-- omit in toc -->
 ##### **Aspect: Command Format**
 - **Alternative 1** Prefix before every value (current choice):
   - Example: `find t/teamLead t/friends`
@@ -222,6 +243,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### \[Proposed\] Undo/redo feature
 
+<!-- omit in toc -->
 #### Proposed Implementation
 
 It extends `FirstImpressions` with an undo/redo history, stored internally as an `FirstImpressionsStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -234,6 +256,8 @@ These operations are exposed in the `Model` interface as `Model#commitFirstImpre
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
+<div style="page-break-after: always;"></div>
+
 Step 1. The user launches the application for the first time. The `VersionedFirstImpressions` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
@@ -245,6 +269,8 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitFirstImpressions()`, causing another modified address book state to be saved into the `FirstImpressionsStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitFirstImpressions()`, so the address book state will not be saved into the `FirstImpressionsStateList`.
 
@@ -289,6 +315,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png"/>
 
+<!-- omit in toc -->
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -331,6 +358,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**: Helps leaders to keep track of their team of relationship professionals’ strengths, along with their schedules. With FirstImpressions, no client request is too hard to handle as our system is able to search through multiple preferences, ensuring the perfect match for our customers.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -362,6 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: User
 
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS):**
 1. User checks list of all persons
 2. User requests to add specific person in the list
@@ -372,35 +401,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
  - 2a. Person already exists \
-    FirstImpressions throws error "A person with this name already exists in your address book!
-    If you want to add tags to this person, please include a t/TAG field in your command.
-    Example: add n/John Doe t/VIP" \
+    FirstImpressions throws error <br>
+    <code>
+    A person with this name already exists in your address book!<br>
+    If you want to add tags to this person, please include a t/TAG field in your command.<br>
+    Example: add n/John Doe t/VIP
+    </code><br>
     Use case ends
 
  - 2b. Name is too long \
-    FirstImpressions throws error "Name too long" \
+    FirstImpressions throws error <br>
+    <code>
+    Name too long
+    </code><br>
     Use case ends
 
+<div style="page-break-after: always;"></div>
+
  - 2c. Name is blank \
-    FirstImpressions throws error "Names should not be blank and must be 100 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Names should not be blank and must be 100 characters or less.
+    </code><br>
     Use case ends
 
  - 2d. Too many tags \
-    FirstImpressions throws error "Cannot add tags - tag limit reached!\nContact '[name]' already has [X] tag(s), and you're trying to add [Y] more.\nMaximum allowed: [max] tags per contact.\nPlease remove some existing tags before adding new ones." \
+    FirstImpressions throws error <br>
+    <code>
+    Cannot add tags - tag limit reached!<br>
+    Contact '[name]' already has [X] tag(s), and you're trying to add [Y] more.<br>
+    Maximum allowed: [max] tags per contact.<br>
+    Please remove some existing tags before adding new ones.
+    </code><br>
     Use case ends
 
  - 2e. Invalid tag \
-    FirstImpressions throws error "Tag names should not be blank and should only contain letters and numbers (no spaces or special characters).\nExamples: 'VIP', 'friend', 'colleague2024'" \
+    FirstImpressions throws error <br>
+    <code>
+    Tag names should not be blank and should only contain letters and numbers (no spaces or special characters).<br>
+    Examples: 'VIP', 'friend', 'colleague2024'
+    </code><br>
     Use case ends
 
  - 2f. Tag is too long \
-    FirstImpressions throws error "Tag name is too long! Please keep it to 50 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Tag name is too long! Please keep it to 50 characters or less.
+    </code><br>
     Use case ends
 
  - 2g. Email is too long \
-    FirstImpressions throws error "Email address is too long! Please keep it to 50 characters or less." \
+    FirstImpressions throws error <br>
+    <code>
+    Email address is too long! Please keep it to 50 characters or less.
+    </code><br>
     Use case ends
 
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Delete a Person**
 
@@ -408,6 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: User
 
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS):**
 1. User checks list of all persons
 2. User requests to delete specific person
@@ -417,9 +475,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. Person does not exist \
-  FirstImpressions throws error "Could not find anyone named '[name]' in your address book.\nPlease check the name and try again." \
-  Use case ends
+- **2a.** Person does not exist. \
+  FirstImpressions displays an error <br>
+  <code>
+  Could not find anyone named '[name]' in your address book.<br>
+  Please check the name and try again.
+  </code><br>
+  Use case ends.
 
 
 #### **Use Case: Book a Person**
@@ -428,6 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: User
 
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS):**
 1. User checks list of all persons
 2. User requests to book client to team member at specific datetime
@@ -438,33 +501,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. Double Booking \
-  FirstImpressions throws error "Booking conflict! [Team Member] is already booked at [datetime].\nExisting booking: Client '[Client Name]' for [[Description]]\nPlease choose a different time slot." \
+  FirstImpressions throws error <br>
+  <code>
+  Booking conflict! [Team Member] is already booked at [datetime].<br>
+  Existing booking: Client '[Client Name]' for [[Description]]<br>
+  Please choose a different time slot.
+  </code><br>
   Use case ends
 
+<div style="page-break-after: always;"></div>
+
 - 2b. Missing parameters \
-  FirstImpressions displays an error: "Invalid command format!\n[Usage details]" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!<br>
+  [Usage details]
+  </code><br>
   Use case ends
 
 - 2c. Invalid client name (blank/too long) \
-  FirstImpressions throws error "Client name should not be blank and must be 100 characters or less." \
+  FirstImpressions throws error <br>
+  <code>
+  Client name should not be blank and must be 100 characters or less.
+  </code><br>
   Use case ends
 
 - 2d. Invalid datetime format \
-  FirstImpressions throws error "Invalid date/time format or value!\nPlease use the format: YYYY-MM-DD HH:MM (e.g., 2024-12-25 14:30)" \
+  FirstImpressions throws error <br>
+  <code>
+  Invalid date/time format or value!<br>
+  Please use the format: YYYY-MM-DD HH:MM (e.g., 2024-12-25 14:30)
+  </code><br>
   Use case ends
 
 - 2e. Invalid datetime value \
-  FirstImpressions throws error "Invalid datetime \"[formatted datetime]\", that datetime does not exist " (e.g., "Invalid datetime \"February 31st 2026 14:00\", that datetime does not exist " for invalid dates like February 31st) \
+  FirstImpressions throws error <br>
+  <code>
+  Invalid datetime "[formatted datetime]", that datetime does not exist
+  </code><br>
+  (e.g., "Invalid datetime \"February 31st 2026 14:00\", that datetime does not exist " for invalid dates like February 31st) <br>
   Use case ends
 
 - 2f. Duplicate parameter \
-  FirstImpressions throws error "You've specified multiple values for these fields that should only have one value: [duplicate field names]" \
+  FirstImpressions throws error <br>
+  <code>
+  You've specified multiple values for these fields that should only have one value: [duplicate field names]
+  </code><br>
   Use case ends
 
 - 2g. Unknown parameter \
-  FirstImpressions throws error "Unknown parameter: [parameter]. Valid parameters are d/, c/, p/, desc/" \
+  FirstImpressions throws error <br>
+  <code>
+  Unknown parameter: [parameter]. Valid parameters are d/, c/, p/, desc/
+  </code><br>
   Use case ends
 
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Find a Person**
 
@@ -472,8 +564,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: User
 
----
-
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS) - Finding by Name**
 
 1. User requests to find persons by name using the `find n/NAME` command.
@@ -489,19 +580,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Name search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find n/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario.
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario.
 
 - **3c.** Partial name provided. \
   FirstImpressions lists all persons whose names contain the given substring.
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS) - Finding by Tag**
 
 1. User requests to find persons by tag using the `find t/TAG` command.
@@ -516,20 +617,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Tag search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find t/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario.
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario.
 
 - **3c.** Multiple valid prefixes provided. \
   FirstImpressions combines criteria (logical OR semantics) to refine results.
 
+<div style="page-break-after: always;"></div>
 
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS) - Finding by Date**
 
 1. User requests to find persons by booking date using the `find d/YYYY-MM-DD` command.
@@ -544,22 +654,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions (Date search)**
 
 - **1a.** Unknown or invalid prefix provided. \
-  FirstImpressions displays an error: "Invalid command format!" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid command format!
+  </code><br>
   Use case ends.
 
 - **1b.** Invalid date format provided. \
-  FirstImpressions displays an error: "Invalid date! Expected format: YYYY-MM-DD (e.g., 2025-10-20)" \
+  FirstImpressions displays an error <br>
+  <code>
+  Invalid date! Expected format: YYYY-MM-DD (e.g., 2025-10-20)
+  </code><br>
   Use case ends.
 
 - **3a.** No persons match the search criteria. \
-  FirstImpressions displays "0 persons listed!" \
+  FirstImpressions displays <br>
+  <code>
+  0 persons listed!
+  </code><br>
   Use case ends.
 
 - **3b.** Valid prefix provided but no parameter (e.g., `find d/`). \
-  FirstImpressions lists all persons. Use case continues as in the main scenario. <br>
+  FirstImpressions lists all persons. <br>
+  Use case continues as in the main scenario. <br>
 
-
----
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Help Menu**
 
@@ -567,12 +686,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: User
 
+<!-- omit in toc -->
 ##### **Main Success Scenario (MSS):**
 1. User requests for help menu
 2. FirstImpressions shows pop-up menu with all command usage
 3. Use case ends
 
----
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -581,35 +701,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Searching for 1000 contacts should return under 1s.
 5.  Create, edit, delete actions should be completed under `150`ms.
-6.  Should be able to import 1000 contacts from CSV in 3s or less.
-7.  Should be able to export 1000 contacts to CSV or JSON in 2s or less.
-8.  UI remains responsive during bulk ops.
-9.  Should perform all writes atomically so that no contact data is lost on crash or power out.
-10. Should autosave any contact creation, edit or delete within 1s of the action.
-11. The system should support efficient keyboard navigation.
-12. Should provide clear error message and guidance on failed import/export.
-13. Should work for x86 and ARM processors without modification.
-14. Should support multiple file types for import and export (CSV/JSON).
-15. Should run offline for all core features.
-16. Should log all system errors to a local file with timestamps.
-17. Should not exceed 100MB in log file size.
-
+6.  UI remains responsive during bulk ops.
+7.  Should perform all writes atomically so that no contact data is lost on crash or power out.
+8.  Should autosave any contact creation, edit or delete within 1s of the action.
+9.  The system should support efficient keyboard navigation.
+10. Should work for x86 and ARM processors without modification.
+11. Should run offline for all core features.
+12. Should log all system errors to a local file with timestamps.
+13. Should not exceed 100MB in log file size.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Team member**: A person recorded in our system
-* **Team manager**: The users of FirstImpressions, who find suitable team members for clients.
-* **Client**: Customers who are finding a specific person who fits certain criteria, which our team managers are finding people for.
+* **Team member**: A person recorded in our system, who is someone under the user's team and management
+* **Team manager**: The users of FirstImpressions, who find suitable team members for clients
+* **Client**: Customers who are finding a specific person who fit certain criteria, which our team manager users are finding people for
 * **Booking**: A scheduled meeting between a Client and a Team Member.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
-###  Filter Booking Table for `find`
+### Filter Booking Table for `find`
 
+<!-- omit in toc -->
 #### Enhancement Description
 
 Highlights relevant bookings to users searching by client name using `find d/`.
@@ -619,6 +736,7 @@ Highlights relevant bookings to users searching by client name using `find d/`.
   - `Model#markBookings(Predicate<Person> predicate)` — Mark all relevant bookings that match search criteria
   - `UI#highlightBookings()` — Highlights all relevant bookings
 
+<!-- omit in toc -->
 #### Usage Scenario
 
 1.  The user uses `find` command to search for bookings under a specific client: `find d/2026-03-25` <br>
@@ -626,6 +744,7 @@ Highlights relevant bookings to users searching by client name using `find d/`.
 
     **Booking Table Highlights Relevant Bookings**
 
+<!-- omit in toc -->
 #### Design Considerations
 
 **Display Format:**
@@ -639,6 +758,7 @@ Highlights relevant bookings to users searching by client name using `find d/`.
 -  Ensure that the contents of the booking lists are not modified.
 -  Uses a copy of the list of booking to modify the display sequence.
 
+<!-- omit in toc -->
 #### Extensions/ Error Cases
 
  - **Date not found:**
@@ -650,9 +770,11 @@ Highlights relevant bookings to users searching by client name using `find d/`.
 
 ---
 
+<div style="page-break-after: always;"></div>
 
 ### Reschedule Date or Time of Current Booking
 
+<!-- omit in toc -->
 #### Enhancement Description
 
 The reschedule mechanism allows users to update the datetime of an existing booking. It interacts with the **Model** and **Booking** classes to ensure no conflicts occur.
@@ -663,7 +785,7 @@ The reschedule mechanism allows users to update the datetime of an existing book
   - `Booking#setDateTime(LocalDateTime newDateTime)` — Updates the datetime field of a booking.
   - Optional undo support: Track changes in `VersionedFirstImpressions` to allow undo/redo of reschedules.
 
-
+<!-- omit in toc -->
 #### Usage Scenario
 
 1.  The user views all bookings and identifies one to reschedule (e.g., a booking for Carl Kurz).
@@ -711,6 +833,7 @@ The reschedule mechanism allows users to update the datetime of an existing book
 
     **Sequence Diagram for Reschedule Command**
 
+<!-- omit in toc -->
 #### Design Considerations
 
 **Conflict Detection:**
@@ -724,9 +847,11 @@ The reschedule mechanism allows users to update the datetime of an existing book
   - Team member name (`n/`) matches the name in the booking. (New consideration)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Edit Current Booking's Clients/Description
 
+<!-- omit in toc -->
 #### Enhancement Description
 
 The edit booking mechanism allows users to update the client name or description of an existing booking without changing the datetime. This provides flexibility for booking management.
@@ -737,8 +862,7 @@ The edit booking mechanism allows users to update the client name or description
   - `Booking#setClientName(String newClientName)` — Updates the client name field of a booking.
   - `Booking#setDescription(String newDescription)` — Updates the description field of a booking.
 
-
-
+<!-- omit in toc -->
 #### Usage Scenario
 
 1.  The user views all bookings and identifies one to edit (e.g., a booking for Carl Kurz).
@@ -779,7 +903,8 @@ The edit booking mechanism allows users to update the client name or description
       - **Success Example:**
 
         ```
-        Booking updated successfully: Carl Kurz, Client: Madam Wong, Description: Updated consultation details
+        Booking updated successfully: Carl Kurz, Client: Madam Wong,
+        Description: Updated consultation details
         ```
 
       - **Failure Example:** Appropriate error message.
@@ -788,6 +913,7 @@ The edit booking mechanism allows users to update the client name or description
 
     **Sequence Diagram for Edit Booking Command**
 
+<!-- omit in toc -->
 #### Design Considerations
 
 **Field Validation:**
@@ -800,6 +926,7 @@ The edit booking mechanism allows users to update the client name or description
 
   - Edit booking is **all-or-nothing**: either fully applied or not applied at all.
 
+<!-- omit in toc -->
 #### Extensions / Error Cases
 
   - **Booking does not exist:**
@@ -819,8 +946,11 @@ The edit booking mechanism allows users to update the client name or description
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Timezone Support for Scheduled Bookings
 
+<!-- omit in toc -->
 #### Enhancement Description
 
 The timezone mechanism allows users to work with bookings across different timezones, making the application suitable for global teams and clients.
@@ -831,7 +961,7 @@ The timezone mechanism allows users to work with bookings across different timez
   - `Booking#getDateTimeInTimezone(ZoneId timezone)` — Returns booking datetime converted to specified timezone.
   - `Booking#createBookingWithTimezone(String clientName, LocalDateTime datetime, String description, ZoneId timezone)` — Creates booking with timezone awareness.
 
-
+<!-- omit in toc -->
 #### Usage Scenario
 
 1.  The user sets their preferred timezone: `settimezone Asia/Singapore` <br>
@@ -855,7 +985,7 @@ The timezone mechanism allows users to work with bookings across different timez
 
     **Sequence Diagram for Viewing Bookings in Different Timezone**
 
-
+<!-- omit in toc -->
 #### Design Considerations
 
 **Timezone Storage:**
@@ -882,6 +1012,7 @@ The timezone mechanism allows users to work with bookings across different timez
   - Provide migration tools for existing data.
   - Maintain backward compatibility.
 
+<!-- omit in toc -->
 #### Extensions / Error Cases
 
   - **Invalid timezone:**
@@ -898,6 +1029,8 @@ The timezone mechanism allows users to work with bookings across different timez
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -916,7 +1049,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Open a command terminal and navigate to the folder containing the jar file.
 
-   1. Run `java -jar firstimpressions.jar` <br>
+   1. Run `java -jar FirstImpressions.jar` <br>
       Expected: Application launches successfully with the GUI. Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -926,7 +1059,9 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
 
+<!-- omit in toc -->
 ### Adding a person
 
 1. **Adding a person with all fields**
@@ -951,6 +1086,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/ p/123 e/invalid-email`<br>
       Expected: Error message "Names should not be blank and must be 100 characters or less."
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Editing a person
 
 1. **Editing a person's details**
@@ -977,6 +1115,9 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `edit n/john doe p/91234567`<br>
       Expected: Error message "Person with name 'john doe' not found in the address book" is shown (case-sensitive).
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Finding persons
 
 1. **Finding by name**
@@ -1003,6 +1144,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find n/NonExistentPerson`<br>
       Expected: "0 persons listed!" message is shown.
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Deleting a person
 
 1. **Deleting a person while all persons are being shown**
@@ -1024,6 +1168,9 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `delete n/john doe`<br>
       Expected: Error message "Person not found" is shown (case-sensitive).
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Booking Appointments
 
 1. **Creating a booking**
@@ -1050,6 +1197,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `book dt/2025-12-25 10:00 c/Madam Chen n/NonExistentPerson`<br>
       Expected: Error message "Person not found" is shown.
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Clearing all entries
 
 1. **Clearing all data**
@@ -1058,6 +1208,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `clear f/`<br>
       Expected: All persons and bookings are removed. Success message shown. Contact list becomes empty.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -1088,6 +1240,9 @@ testers are expected to do more *exploratory* testing.
    3. Launch the application again.<br>
       Expected: The person "Test Person" is still in the contact list.
 
+<div style="page-break-after: always;"></div>
+
+<!-- omit in toc -->
 ### Help command
 
 1. **Accessing help**
@@ -1095,6 +1250,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `help`<br>
       Expected: Help window opens showing available commands and User Guide link.
 
+<!-- omit in toc -->
 ### Exit command
 
 1. **Exiting the application**

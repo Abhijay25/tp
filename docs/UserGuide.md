@@ -5,9 +5,9 @@ title: User Guide
 
 <div class="print-toc" markdown="1">
 
+<!-- omit in toc -->
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Target Users](#target-users)
   - [User Proficiency Level](#user-proficiency-level)
@@ -34,6 +34,7 @@ title: User Guide
 - [Command Summary](#command-summary)
 
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Introduction
 
@@ -69,15 +70,15 @@ With FirstImpressions, no client request is too hard to handle as our system is 
 
 1. **Ensure you have Java 17 or above installed in your Computer.**
 
-   <div markdown="span" class="alert alert-info">:information_source: **Java Installation Guide:**
+   <div markdown="span" class="alert alert-info">:information_source: **Java Installation Guide:** <br>
 
-   **Windows users:** Download Java 17 from [Oracle's official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or use [OpenJDK 17](https://adoptium.net/temurin/releases/?version=17).
+   **Windows users:** Download Java 17 from [Oracle's official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or use [OpenJDK 17](https://adoptium.net/temurin/releases/?version=17). <br>
 
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
 
-   **Linux users:** Install OpenJDK 17 using your package manager:
-   - Ubuntu/Debian: `sudo apt install openjdk-17-jdk`
-   - CentOS/RHEL: `sudo yum install java-17-openjdk-devel`
+   **Linux users:** Install OpenJDK 17 using your package manager: <br>
+   - Ubuntu/Debian: `sudo apt install openjdk-17-jdk` <br>
+   - CentOS/RHEL: `sudo yum install java-17-openjdk-devel` <br>
    - Arch Linux: `sudo pacman -S jdk17-openjdk`
    </div>
 
@@ -98,6 +99,8 @@ With FirstImpressions, no client request is too hard to handle as our system is 
    OpenJDK 64-Bit Server VM (build 17.0.x+x, mixed mode, sharing)
    ```
 
+<div style="page-break-after: always;"></div>
+
 ### Installation Steps
 
 Step 1: **Download the latest `.jar` file** from [here](https://github.com/AY2526S1-CS2103T-T08-4/tp/releases).
@@ -112,7 +115,7 @@ Step 3: **Run the application**
 
    - Open your command terminal, [as follows](#verify-java)
    - Navigate to the folder: `cd /path/to/your/folder`
-   - Run: `java -jar firstimpressions.jar`
+   - Run: `java -jar FirstImpressions.jar`
 
 Step 4: **Verify successful launch:** <br>
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -141,6 +144,8 @@ Step 6: **Explore more features** <br>
 Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## Features
 
@@ -166,6 +171,8 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a short summary of available commands, with a link to access the User Guide.
@@ -175,6 +182,7 @@ Shows a short summary of available commands, with a link to access the User Guid
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -209,6 +217,8 @@ Try using camelCase for multi-word tags! (e.g. `vipHandler`, instead of `vip-han
 * Tags: Maximum 50 characters. Letters and numbers only <br>
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `add n/Germaine` <br> will add a Person called `Germaine` to the contact list.
@@ -217,6 +227,8 @@ Examples:
 * `add n/Alice Tan t/teamLead t/vipHandler` <br> will add a Person called `Alice Tan` with tags `teamLead` and `vipHandler` to the contact list. <br>
 <img src="images/addMessage-UG.png" width="700px" alt="add message"> <br>
 *Figure 2: Adding a new person to the contact list*
+
+<div style="page-break-after: always;"></div>
 
 ### Adding tags to an existing person: `add`
 
@@ -239,11 +251,15 @@ To change phone numbers or email addresses, use the `edit` command instead.
 If the name does not match a current name in the contact list, a new Person will be created.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `add n/Alice Tan t/chineseSpeaking t/closer` <br> will add, to an existing Person `Alice Tan`, the tags `chineseSpeaking` and `closer`. It will be added onto her current tags <br>
 <img src="images/addTags-UG.png" width="700px" alt="add tags"> <br>
 *Figure 3: Success message after adding tags to an existing person*
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -254,6 +270,8 @@ Format: `list`
 <img src="images/list-UG.png" width="700px" alt="list">
 
 *Figure 4: Contact list showing all persons in the address book*
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -278,6 +296,8 @@ For example, if a person has tags `teamLead` and `sales`, using `edit n/John t/m
 If you don't specify any changes, you'll see: "No changes specified! Please provide at least one field to edit (name, phone, email, or tags)."
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `edit n/John Doe p/91234567 e/johntan@gmail.com` <br>
 Will edit the phone number and email address of the person named `John Doe` to be `91234567` and `johntan@gmail.com` respectively.
@@ -290,6 +310,8 @@ Edits the phone number of `Alice Tan` to be `+1 (555) 123-4567`. <br>
 <img src="images/editMessage-UG.png" width="700px" alt="edit message"> <br>
 *Figure 5: Success message after editing a person's details*
 
+<div style="page-break-after: always;"></div>
+
 ### Searching for persons or bookings : `find`
 
 The `find` command offers a flexible way for users to filter the contact list by **name**, **tag**, and **scheduled date of bookings**. <br>
@@ -298,7 +320,6 @@ Format: <br>
 `find n/NAME1 [n/NAME2]...` <br>
 `find t/TAG1 [t/TAG2]...` <br>
 `find d/DATE1 [d/DATE2]...` <br>
-
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 Each search parameter must preceded by its respective delimeter.
@@ -317,6 +338,8 @@ If multiple tags are being searched for, each parameter must have its own `t/`  
 * Partial matches will be shown e.g. `find n/Ali` will find a person named `Alice`
 * Date must be in `YYYY-MM-DD` format.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `find n/John` <br>
 returns `john` and `John Doe`, or any other Person with 'john' in their name, case-insensitively.
@@ -328,6 +351,8 @@ returns all team members in FirstImpressions as it searches for 'any' tag.
 returns `Alice Tan` as she has a Booking on 2026-08-18 14:00. <br>
 <img src="images/findMessage-UG.png" width="700px" alt="find message"> <br>
 *Figure 6: Search results showing team members matching the search criteria*
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -358,6 +383,8 @@ Tag names cannot contain spaces. If you want to delete multiple tags, use separa
 If you use spaces in a tag name, you'll see: "Tag names cannot contain spaces! If you want to delete multiple tags, use separate t/ prefixes."
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `delete n/Alex t/vipHandler` <br>
 will remove the tag `vipHandler` from `Alex` in the contact list.
@@ -369,6 +396,8 @@ will remove `Alex Yeoh` from the contact list entirely.
 will remove the first booking from `Alex Yeoh` in the contact list. <br>
 <img src="images/deleteMessage-UG.png" width="700px" alt="delete message"> <br>
 *Figure 7: Success message after deleting a person from the contact list*
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -388,6 +417,8 @@ The `clear f/` command permanently deletes ALL contacts and bookings. This actio
 If you accidentally type `clear`, don't worry! The system will show you a warning message instead of deleting your data. You must explicitly use `clear f/` to confirm the deletion.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `clear` - Shows a warning message without deleting any data <br>
 <img src="images/clearMessage-UG.png" width="400px" alt="clear message warning"> <br>
@@ -398,6 +429,7 @@ Examples:
 <img src="images/clearf_UG.png" width="400px" alt="clear message"> <br>
 *Figure 9: Success message after contact list has been cleared*
 
+<div style="page-break-after: always;"></div>
 
 ### Assigning a booking : `book`
 
@@ -433,6 +465,8 @@ Dates must be valid calendar dates. <br>
 Invalid dates like `2026-02-31 14:00` will be rejected with: `Invalid datetime "February 31st 2026 14:00", that datetime does not exist `.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `book dt/2020-10-26 17:00 c/Mr Lim n/Alice Yeoh desc/backdated` <br>
@@ -449,6 +483,8 @@ will assign a booking on 20th September 2025 10.30am to Bob Lee. The client will
 Double booking is not allowed! <br>
 If you try to add a Booking to someone who's busy at the same date and time, you'll see: "This person already has a booking at this time. Please choose a different time slot."
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -471,6 +507,8 @@ If your changes to the data file makes its format invalid, FirstImpressions will
 Furthermore, certain edits can cause the FirstImpressions to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
 Names manually edited to include additional spaces, will be normalised to only 1 space between words. This follows the same reasoning of how `add` creates a Person.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -526,6 +564,8 @@ If you do want an empty phone number, set the phone number to "-"!
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
