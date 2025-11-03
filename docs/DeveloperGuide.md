@@ -612,13 +612,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 12. Should log all system errors to a local file with timestamps.
 13. Should not exceed 100MB in log file size.
 
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Team member**: A person recorded in our system
-* **Team manager**: The users of FirstImpressions, who find suitable team members for clients.
-* **Client**: Customers who are finding a specific person who fits certain criteria, which our team managers are finding people for.
+* **Team member**: A person recorded in our system, who is someone under the user's team and management
+* **Team manager**: The users of FirstImpressions, who find suitable team members for clients
+* **Client**: Customers who are finding a specific person who fit certain criteria, which our team manager users are finding people for
 * **Booking**: A scheduled meeting between a Client and a Team Member.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -626,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Planned Enhancements**
 
-###  Filter Booking Table for `find`
+### Filter Booking Table for `find`
 
 <!-- omit in toc -->
 #### Enhancement Description
