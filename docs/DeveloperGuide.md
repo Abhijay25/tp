@@ -372,23 +372,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
  - 2a. Person already exists \
-    FirstImpressions rejects duplicate \
+    FirstImpressions throws error "A person with this name already exists in your address book!
+    If you want to add tags to this person, please include a t/TAG field in your command.
+    Example: add n/John Doe t/VIP" \
     Use case ends
 
  - 2b. Name is too long \
     FirstImpressions throws error "Name too long" \
     Use case ends
 
- - 2c. Invalid name (blank/empty) \
-  FirstImpressions throws error "Names should not be blank and must be 100 characters or less." \
-  Use case ends
+ - 2c. Name is blank \
+    FirstImpressions throws error "Names should not be blank and must be 100 characters or less." \
+    Use case ends
 
  - 2d. Too many tags \
-    FirstImpressions throws error "Remove existing tag before adding new one" \
+    FirstImpressions throws error "Cannot add tags - tag limit reached!\nContact '[name]' already has [X] tag(s), and you're trying to add [Y] more.\nMaximum allowed: [max] tags per contact.\nPlease remove some existing tags before adding new ones." \
     Use case ends
 
  - 2e. Invalid tag \
-    FirstImpressions throws error "Tag names should not be blank and should only contain letters and numbers (no spaces or special characters)." \
+    FirstImpressions throws error "Tag names should not be blank and should only contain letters and numbers (no spaces or special characters).\nExamples: 'VIP', 'friend', 'colleague2024'" \
     Use case ends
 
  - 2f. Tag is too long \
@@ -416,11 +418,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. Person does not exist \
-  FirstImpressions throws error "Name to delete required" \
-  Use case ends
-
-- 2b. Active appointment exists \
-  FirstImpressions prompts "Deleting [person]: [count] active appointment(s) exist past current date. These appointments will be automatically cancelled." \
+  FirstImpressions throws error "Could not find anyone named '[name]' in your address book.\nPlease check the name and try again." \
   Use case ends
 
 
@@ -440,11 +438,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. Double Booking \
-  FirstImpressions throws error "[Team Member] is already booked at 2025-09-18 14:00 with client [Client Name] for [other consultation]." \
+  FirstImpressions throws error "Booking conflict! [Team Member] is already booked at [datetime].\nExisting booking: Client '[Client Name]' for [[Description]]\nPlease choose a different time slot." \
   Use case ends
 
 - 2b. Missing parameters \
-  FirstImpressions throws error "Booking requires datetime, client, team member, and description." \
+  FirstImpressions displays an error: "Invalid command format!\n[Usage details]" \
   Use case ends
 
 - 2c. Invalid client name (blank/too long) \
@@ -460,15 +458,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends
 
 - 2f. Duplicate parameter \
-  FirstImpressions throws error "Parameter [parameter] specified multiple times. Each parameter should appear only once." \
+  FirstImpressions throws error "You've specified multiple values for these fields that should only have one value: [duplicate field names]" \
   Use case ends
 
-- 2e. Invalid Date \
-  FirstImpressions throws error "Invalid date "Month [MM] [DD]th [YYYY]", that date does not exist in the (Gregorian) calendar" \
-  Use case ends
-
-- 3e. Unknown parameter \
-  FirstImpressions throws error "Unknown parameter: [parameter]. Valid parameters are /d, /c, /p, /desc" \
+- 2g. Unknown parameter \
+  FirstImpressions throws error "Unknown parameter: [parameter]. Valid parameters are d/, c/, p/, desc/" \
   Use case ends
 
 
