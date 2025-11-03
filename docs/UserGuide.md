@@ -5,9 +5,9 @@ title: User Guide
 
 <div class="print-toc" markdown="1">
 
+<!-- omit in toc -->
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Target Users](#target-users)
   - [User Proficiency Level](#user-proficiency-level)
@@ -70,15 +70,15 @@ With FirstImpressions, no client request is too hard to handle as our system is 
 
 1. **Ensure you have Java 17 or above installed in your Computer.**
 
-   <div markdown="span" class="alert alert-info">:information_source: **Java Installation Guide:**
+   <div markdown="span" class="alert alert-info">:information_source: **Java Installation Guide:** <br>
 
-   **Windows users:** Download Java 17 from [Oracle's official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or use [OpenJDK 17](https://adoptium.net/temurin/releases/?version=17).
+   **Windows users:** Download Java 17 from [Oracle's official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or use [OpenJDK 17](https://adoptium.net/temurin/releases/?version=17). <br>
 
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). <br>
 
-   **Linux users:** Install OpenJDK 17 using your package manager:
-   - Ubuntu/Debian: `sudo apt install openjdk-17-jdk`
-   - CentOS/RHEL: `sudo yum install java-17-openjdk-devel`
+   **Linux users:** Install OpenJDK 17 using your package manager: <br>
+   - Ubuntu/Debian: `sudo apt install openjdk-17-jdk` <br>
+   - CentOS/RHEL: `sudo yum install java-17-openjdk-devel` <br>
    - Arch Linux: `sudo pacman -S jdk17-openjdk`
    </div>
 
